@@ -2,7 +2,7 @@
   "name": "iRTC",
   "version": "0.0.1",
   "description": "A Wrapper library for easy webRTC",
-  "main": "irtc.js",
+  "main": "dist/irtc.js",
   "repository": "",
   "keywords": [
     "webrtc"
