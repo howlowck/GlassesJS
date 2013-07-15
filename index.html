@@ -30,37 +30,100 @@
 
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="irtc" class="anchor" href="#irtc"><span class="octicon octicon-link"></span></a>iRTC</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>iRTC is a wrapper library that helps you to easily and quickly access webRTC and getUserMedia.  It has AMD and regular global.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Include the library:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">".../path/to/irtc.js"</span> <span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>In your HTML:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;video</span> <span class="na">id=</span><span class="s">"camfeed"</span> <span class="na">width=</span><span class="s">"320"</span> <span class="na">height=</span><span class="s">"240"</span><span class="nt">&gt;&lt;/video&gt;</span>
+<span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"image"</span> <span class="na">width=</span><span class="s">"320"</span> <span class="na">height=</span><span class="s">"240"</span><span class="nt">&gt;&lt;/canvas&gt;</span>
+</pre></div>
+
+<p>In your Javascript:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">iRTC</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'camera'</span><span class="p">);</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">'#camfeed'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">iRTC</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'canvas'</span><span class="p">,</span> <span class="nx">camera</span><span class="p">);</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">'#image'</span><span class="p">);</span>
+</pre></div>
+
+<p>That's it!</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="if-you-prefer-amd-with-requirejs" class="anchor" href="#if-you-prefer-amd-with-requirejs"><span class="octicon octicon-link"></span></a>if you prefer AMD with RequireJS</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>In your main.js:</p>
+
+<div class="highlight"><pre><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'irtc'</span><span class="o">:</span> <span class="s1">'path/to/dist/irtc'</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>then simply require it like so...</p>
+
+<div class="highlight"><pre><span class="nx">require</span><span class="p">([</span><span class="s1">'irtc'</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">iRTC</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Your Code</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Notice you are including the same file... how cool is that? :)</p>
+
+<h2>
+<a name="basic-api" class="anchor" href="#basic-api"><span class="octicon octicon-link"></span></a>Basic API</h2>
+
+<p>To start any module, you'll call <code>create()</code>, and it will return an object.  For example, if you want a camera, call <code>iRTC.create('camera')</code></p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="camera" class="anchor" href="#camera"><span class="octicon octicon-link"></span></a>Camera</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Camera also includes the video element.  </p>
+
+<h4>
+<a name="cameraisselector" class="anchor" href="#cameraisselector"><span class="octicon octicon-link"></span></a>Camera.is(selector)</h4>
+
+<p>So, if you have a DOM <code>&lt;video id="cam" width="320" height="240"&gt;&lt;/video&gt;</code>.
+You just have to call </p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">iRTC</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'camera'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s2">"#cam"</span><span class="p">);</span>
+</pre></div>
+
+<p>to start the camera and see the feed in the video element.</p>
+
+<h4>
+<a name="cameragetstream" class="anchor" href="#cameragetstream"><span class="octicon octicon-link"></span></a>Camera.getStream()</h4>
+
+<p>Once you have the getUserMedia, you can get the stream using this method.</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="canvas" class="anchor" href="#canvas"><span class="octicon octicon-link"></span></a>Canvas</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>With canvas, you gain access to the pixel level details neccessary for more advanced image manipulation</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<h4>
+<a name="canvasisselector-connection" class="anchor" href="#canvasisselector-connection"><span class="octicon octicon-link"></span></a>Canvas.is(selector, connection)</h4>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>To specify with camera you want to canvas to connect to, specify the connection like this... </p>
+
+<div class="highlight"><pre><span class="c1">// with a canvas id="image" and a camera iRTC object called 'cam'</span>
+<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">iRTC</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'canvas'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s1">'#image'</span><span class="p">,</span> <span class="nx">cam</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="canvasgetimage" class="anchor" href="#canvasgetimage"><span class="octicon octicon-link"></span></a>Canvas.getImage()</h4>
+
+<p>Once you have the canvas image, you can simply access the image data with this method.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
